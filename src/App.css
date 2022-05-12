@@ -1,38 +1,65 @@
-.App {
-  text-align: center;
+*, *::before, *::after{/*Se indica que para todo el docto aplique los siguientes cambios*/
+ box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body{
+  background: linear-gradient(to right, #041868, #ad0808, #a87c02)/*colores de la gradiente*/
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.App{
+  height: 100vh;/*altura y anchura de la aplicacion*/
+  width: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.calculator-grid{
+  display: grid;/*ajuste del contenido*/
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-content: center;
+  min-height: 80vh; /*altura minima*/
+  grid-template-columns: repeat(4, 80px);/*4 columnas de 80 pixeles*/
+  grid-template-rows: minmax(80px, auto) repeat(5, 80px);/*5 filas de 80 pixeles minimo*/
 }
 
-.App-link {
-  color: #61dafb;
+.calculator-grid > button {/*indica que afecta a todos los botones de la clase calculator-grid*/
+  border-radius: 1rem; /*redondea los bordes*/
+  cursor: pointer; /*cambia el cursor al pasarlo sobre el boton*/
+  font-size: 1rem; /*magnifica ligeramente el tamaño de fuente*/
+  font-weight: bold; /*fuente tipo negrita*/
+  color: black; /*color de la fuente*/
+  border: 1px solid white;/*grosor, estilo y color del borde*/
+  outline: none;
+  background-color: #fafafa75;/*color y opacidad de los botones*/
+  margin: 3px;/*margen entre botones de 3 pixeles*/
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.calculator-grid > button:hover {/*hover para todos los botones*/
+  background-color: #fafafa; /*cambia el color del botón mientras el puntero esté encima*/
+}
+
+.span-two {
+  grid-column: span 2; /*modifica la envergadura de los botones de la clase span-two*/
+}
+
+.output {
+  grid-column: 1 / -1;/*rellena de la columna 1 a la -1 para ajustar los botones ac y =*/
+  margin-bottom: .5rem; /*margen inferior*/
+  background-color: white; /*color del output, la pantalla*/
+  display: flex;/*contenido desplegado de forma horizontal*/
+  align-items: flex-end;/*alineado de los objetos*/
+  justify-content: space-around;/*justificado del contenido*/
+  flex-direction: column;/*alineado en direccion vertical*/
+  border-radius: 1rem; /*redondeado del borde*/
+  padding: 10px; /*relleno de 10 pixeles*/
+  word-wrap: break-word;/*modifica el contenedor en función del texto*/
+  word-break: break-all;
+}
+
+.output .previous-operand {
+  color: #00000090;/*negro con opacidad al 90%*/
+  font-size: 1.5rem;/*tamaño de fuente del operando previo*/
+}
+
+.output .current-operand {
+  color: #2600ff;/*azul derivado*/
+  font-size: 2.5rem;/*tamaño de fuente del operando actual*/
 }
