@@ -2,20 +2,21 @@ import './App.css';
 import React, {useState} from 'react';
 
 function App() {
-
+//alineado del texto de titulo y color de fuente
 const hStyle = {textAlign: 'center', color: 'white' };
 const [number1, setNumber1] = useState("");
 const [number2, setNumber2] = useState("");
 const [currentOperation, setCurrentOperation] = useState("");
 const [result, setResult] = useState(0);
 const deleteNumber =() => {
-  //borra los operandos usando del
+  //borra los operandos usando DEL
   if (currentOperation === ""){
     setNumber1(number1.toString().slice(0,-1));
   } else {
     setNumber2(number2.toString().slice(0,-1));
   }
 };
+
 
 function allClear() {
   setNumber1("");
@@ -36,6 +37,7 @@ function clickNumber (val) {
   }
 //funcion que obtiene el resultado dependiendo de la operación realizada
   function getResult (){
+
     switch (currentOperation) {
       case "+":
         //convierte los valores string a numeros
