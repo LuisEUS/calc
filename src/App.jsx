@@ -8,6 +8,22 @@ const [number1, setNumber1] = useState("");
 const [number2, setNumber2] = useState("");
 const [currentOperation, setCurrentOperation] = useState("");
 const [result, setResult] = useState(0);
+
+const initialState = JSON.parse(localStorage.getItem("hist")) || []
+const [hist, setHist] = useState(initialState)
+
+const handleHist = () => {
+  var dato1 = number1.opera1; //almacena en una variable
+  var dato2 = currentOperation.opera2; //almacena en una variable
+  var op = setResult.operador //almacena el operador
+  var res = result; //almacena resultado en una variable
+
+  //Agrega al almacenmiento local el JSON de la operación realizada
+  localStorage.setItem("hist", JSON.stringify([...hist, { opera1: dato1, opera2: dato2, operador: op, resultado: res, }, ]));
+  //Actualiza el state que obtiene el historial de operaciones
+  setHist([...hist, { opera1: dato1, opera2: dato2, operador: op, resultado: res, },]);
+};
+
 const deleteNumber =() => {
   //borra los operandos usando DEL
   if (currentOperation === ""){
@@ -87,6 +103,32 @@ function clickNumber (val) {
         <button onClick={() => {clickNumber(".")}}>.</button>
         <button onClick={() => {clickNumber(0)}}>0</button>
         <button onClick={getResult}className='span-two'>=</button> {/*impresión del resultado*/}
+        <button onClick={handleHist}className='span-two'>Hist</button> {/*impresión del resultado*/}
+      </div>
+
+          {/*historial calculadora*/}
+
+            <div className="col" style={{ width: 400 }}>
+        <span className="row">
+          <div className="col"
+            style={{ width: 400, left: 0 }}
+          >
+            <h3 style={ hStyle }>Historial de operaciones</h3>
+
+            {hist.length === 0 ? ("Al momento no hay Operaciones que mostrar") 
+            : (
+              <ol>
+                {hist.map((item, index ) => {
+                  return (
+                    <li className="" >
+                      {item.opera1} , {item.operador} , {item.opera2} es igual a: {item.resultado} &nbsp;
+                    </li>
+                  );
+                })}
+              </ol>
+            )}
+          </div>
+        </span>
       </div>
     </div>
   );
